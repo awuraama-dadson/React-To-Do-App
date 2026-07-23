@@ -1,10 +1,12 @@
 import { useState } from "react";
+import Header from "./assets/components/Header";
+import TaskInput from "./assets/components/TaskInput";
 
 const App = () => {
   type Task = {
-    id: number;
-    text: string;
-    completed: boolean;
+    id: number,
+    text: string,
+    completed: boolean,
   };
 
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -37,26 +39,13 @@ const deleteTask = (id : number) => {
 
   return (
     <>
-      <div>
-        <h1 className="message">Good Morning, Gorgeous!</h1>
-      </div>
-      <div className="sub-h">
-        Time to romanticize your productivity. What's on today's list?{" "}
-      </div>
-      <div className="input-div">
-        <input
-          className="input"
-          type="text"
-          value={input}
-          placeholder="Enter a task girl 💗"
-          onChange={(e) => setInput(e.target.value)}
-        ></input>
-      </div>
-      <div className="btn-container">
-        <button className="button" onClick={addTask}>
-          Add a Task
-        </button>
-      </div>
+      <Header/>
+      <TaskInput
+      input={input}
+      setInput={setInput}
+      addTask={addTask}
+      />
+
       <ul className="task-list">
         {tasks.map((task) => (
           <li
