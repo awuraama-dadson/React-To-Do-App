@@ -1,22 +1,22 @@
+import type { Task } from "../types/task";
+
 interface TaskItemProps {
-  task: {
-    id: number;
-    text: string;
-    completed: boolean;
-  };
+  task: Task;
   toggleTask: (id: number) => void;
   deleteTask: (id: number) => void;
 }
 
 const TaskItem = ({ task, toggleTask, deleteTask }: TaskItemProps) => {
   return (
-    <li key={task.id} onClick={() => toggleTask(task.id)}>
+    <li className="task" onClick={() => toggleTask(task.id)}>
       <span
-        style={{ textDecoration: task.completed ? "Line-through" : "none" }}
+        style={{ textDecoration: task.completed ? "line-through" : "none" }}
       >
         {task.text}
       </span>
-      <button onClick={() => deleteTask(task.id)}>🗑️</button>
+      <button className="close-button" onClick={(e) =>{e.stopPropagation(); deleteTask(task.id)}}>
+        🗑️
+      </button>
     </li>
   );
 };

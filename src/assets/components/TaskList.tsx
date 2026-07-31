@@ -1,26 +1,25 @@
+import type { Task } from "../types/task"
 import TaskItem from "./TaskItem"
 
- type Task = {
-    id: number,
-    text: string,
-    completed: boolean
-  }
-
 interface TaskListProps {
- tasks: Task[],
- toggleTask: (id: number) => void,
- deleteTask: (id: number) => void
+  tasks: Task[],
+  toggleTask: (id: number) => void
+  deleteTask: (id: number) => void
 }
 
-const TaskList = ({tasks, toggleTask, deleteTask}: TaskListProps) => {
+const TaskList = ({tasks, toggleTask, deleteTask} : TaskListProps) => {
   return (
-    <>
-    <div>
-      <ul>
-        <TaskItem />
-      </ul>
-    </div>
-    </>
+  <>
+  <ul className="task-list">
+    {tasks.map((task) => 
+    <TaskItem
+    task={task}
+    toggleTask={toggleTask}
+    deleteTask={deleteTask}
+    />
+    )}
+  </ul>
+  </>
   )
 }
 

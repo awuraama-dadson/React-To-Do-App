@@ -1,16 +1,12 @@
 import { useState } from "react";
 import Header from "./assets/components/Header";
 import TaskInput from "./assets/components/TaskInput";
+import TaskList from "./assets/components/TaskList";
+import type { Task } from "./assets/types/task";
 
 const App = () => {
-  type Task = {
-    id: number,
-    text: string,
-    completed: boolean,
-  };
-
-  const [tasks, setTasks] = useState<Task[]>([]);
   const [input, setInput] = useState("");
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   const addTask = () => {
     if (input.trim() === "") return;
@@ -20,50 +16,27 @@ const App = () => {
       text: input,
       completed: false,
     };
-
     setTasks([...tasks, newTask]);
-    setInput("");
+    setInput('')
   };
 
   const toggleTask = (id: number) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task,
-      ),
-    );
+    setTasks(tasks.map((task) =>
+      id === task.id ? { ...task, completed: !task.completed } : task,
+    ))
   };
 
-const deleteTask = (id : number) => {
- setTasks( tasks.filter((task) => task.id !== id))
-}
+  const deleteTask = (id: number) => {
+    setTasks(tasks.filter((task) => id !== task.id ))
+  }
 
   return (
     <>
-      <Header/>
-      <TaskInput
-      input={input}
-      setInput={setInput}
-      addTask={addTask}
-      />
+      <Header />
 
-      <ul className="task-list">
-        {tasks.map((task) => (
-          <li
-            key={task.id}
-            className="task"
-            onClick={() => toggleTask(task.id)}
-          >
-            <span
-              style={{
-                textDecoration: task.completed ? "line-through" : "none",
-              }}
-            >
-              {task.text}
-            </span>
-            <button className="close-button" onClick={(e) => {e.stopPropagation(); deleteTask(task.id);}}>🗑️</button>
-          </li>
-        ))}
-      </ul>
+      <TaskInput input={input} setInput={setInput} addTask={addTask} />
+
+      <TaskList tasks={tasks} toggleTask={toggleTask} deleteTask={deleteTask} />
     </>
   );
 };
