@@ -10,7 +10,7 @@ const TaskInput = ({input, setInput, addTask} : TaskInputProps) => {
     <div className="input-div">
       <input
         type="text"
-        placeholder="Enter a task girl🌸"
+        placeholder="Enter a task boo🌸"
         className="input"
         value={input}
         onChange={(e)=> setInput(e.target.value)}

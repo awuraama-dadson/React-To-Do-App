@@ -3,7 +3,7 @@ const Header = () => {
   return (
   <>
   <div className="message">
-    Good Morning, Gorgeous!
+    Hello, Gorgeous!
   </div>
   <div className="sub-h">
     Time to romanticize your productivity. What's on today's list?
